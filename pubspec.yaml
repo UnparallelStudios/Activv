@@ -17,3 +17,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: Barlow-Bold
+      fonts:
+        - asset: fonts/Barlow-Bold.ttf
