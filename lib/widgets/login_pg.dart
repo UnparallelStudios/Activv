@@ -20,8 +20,13 @@ class FormPage extends StatelessWidget {
             ),
             const Text("ACTIVV",
                 style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
-            const Text("Get your college data wherever you are"),
-            const Text("whenever you want"),
+            Container(
+              margin: const EdgeInsets.only(bottom: 24),
+              child: const Column(children: [
+                Text("Get your college data wherever you are"),
+                Text("whenever you want"),
+              ]),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Form(
@@ -75,7 +80,11 @@ class FormPage extends StatelessWidget {
                                 );
                               }
                             },
-                            child: const Text("CONTINUE")),
+                            child: const Text(
+                              "CONTINUE",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 16),
+                            )),
                       )
                     ],
                   ),
