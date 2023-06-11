@@ -41,63 +41,81 @@ class Dashboard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                  padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
+                  padding: const EdgeInsets.fromLTRB(10.0, 8.5, 10.0, 10.0),
                   color: const Color.fromRGBO(240, 240, 240, 1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                            foregroundColor:
-                                const Color.fromARGB(255, 200, 152, 245)),
-                        child: const Column(
-                          children: [
-                            Icon(
+                      Column(
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                              foregroundColor:
+                                  const Color.fromARGB(255, 200, 152, 245),
+                              shape: const StadiumBorder(),
+                            ),
+                            child: const Icon(
                               IconData(0xe105, fontFamily: 'MaterialIcons'),
                               color: Colors.black,
                               size: 17,
                             ),
-                            SizedBox(height: 10.0),
-                            Text(
-                              'Label',
-                              style: TextStyle(color: Colors.black),
+                          ),
+                          const Text(
+                            'Label',
+                            style: TextStyle(
+                              color: Colors.black,
+                              height: 0.7,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Column(
-                            children: [
-                              Icon(
-                                IconData(0xe105, fontFamily: 'MaterialIcons'),
-                                color: Colors.black,
-                                size: 17,
-                              ),
-                              SizedBox(height: 10.0),
-                              Text(
-                                'Label',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
-                          )),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Column(
-                            children: [
-                              Icon(
-                                IconData(0xe105, fontFamily: 'MaterialIcons'),
-                                color: Colors.black,
-                                size: 17,
-                              ),
-                              SizedBox(height: 10.0),
-                              Text(
-                                'Label',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
-                          )),
+                      Column(
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                                foregroundColor:
+                                    const Color.fromARGB(255, 200, 152, 245),
+                                shape: const StadiumBorder()),
+                            child: const Icon(
+                              IconData(0xe105, fontFamily: 'MaterialIcons'),
+                              color: Colors.black,
+                              size: 17,
+                            ),
+                          ),
+                          const Text(
+                            'Label',
+                            style: TextStyle(
+                              color: Colors.black,
+                              height: 0.7,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                                foregroundColor:
+                                    const Color.fromARGB(255, 200, 152, 245),
+                                shape: const StadiumBorder()),
+                            child: const Icon(
+                              IconData(0xe105, fontFamily: 'MaterialIcons'),
+                              color: Colors.black,
+                              size: 17,
+                            ),
+                          ),
+                          const Text(
+                            'Label',
+                            style: TextStyle(
+                              color: Colors.black,
+                              height: 0.7,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   )),
             )
