@@ -1,16 +1,20 @@
-import 'package:activv/widgets/login_pg.dart';
 import 'package:flutter/material.dart';
-// import 'package:activv/widgets/logo_pg.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: FormPage());
+    return const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text("Hello World!"),
+        ),
+      ),
+    );
   }
 }
