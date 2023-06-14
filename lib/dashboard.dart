@@ -3,6 +3,7 @@ import 'package:badges/badges.dart' as badges;
 
 void main() => runApp(const MaterialApp(
       home: Dashboard(),
+      debugShowCheckedModeBanner: false,
     ));
 
 class Dashboard extends StatelessWidget {
@@ -12,59 +13,87 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Dashboard',
-            style: TextStyle(
-              fontFamily: 'Inter-Var',
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+          title: const Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 15.0, 0, 0),
+            child: Text(
+              'Dashboard',
+              style: TextStyle(
+                fontFamily: 'Inter-Var',
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ),
           actions: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  height: 45,
-                  width: 45,
-                  decoration: const ShapeDecoration(
-                    color: Colors.white,
-                    shape: CircleBorder(),
-                  ),
-                  child: IconButton(
-                    onPressed: () {},
-                    splashRadius: 0.1,
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                      color: Colors.black,
-                      size: 29,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 0),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    height: 45,
+                    width: 45,
+                    decoration: const ShapeDecoration(
+                      color: Colors.white,
+                      shape: CircleBorder(),
+                    ),
+                    child: badges.Badge(
+                      badgeContent: const SizedBox(
+                          child: Center(
+                        child: Text(
+                          '22',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )),
+                      position: badges.BadgePosition.topEnd(
+                        top: -5,
+                        end: -5,
+                      ),
+                      badgeStyle: const badges.BadgeStyle(
+                        badgeColor: Color.fromRGBO(0, 0, 153, 1),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.zero,
+                        splashRadius: 0.1,
+                        icon: const Icon(
+                          Icons.notifications_outlined,
+                          color: Colors.black,
+                          size: 31,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: 45,
-                  width: 45,
-                  child: IconButton(
-                    onPressed: () {},
-                    splashRadius: 0.1,
-                    icon: Image.asset(
-                      'assets/3d_avatar_13.png',
-                      height: 100,
-                      width: 100,
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: 45,
+                    width: 45,
+                    child: IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.zero,
+                      splashRadius: 0.1,
+                      icon: Image.asset(
+                        'assets/3d_avatar_13.png',
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    width: 15.0,
+                  )
+                ],
+              ),
             )
           ],
           backgroundColor: const Color.fromRGBO(216, 216, 255, 1),
           bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(6.0),
+              preferredSize: const Size.fromHeight(15.0),
               child: Container(
                 color: const Color.fromRGBO(167, 167, 212, 1),
                 height: 3.0,
