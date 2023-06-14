@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 
 void main() => runApp(const MaterialApp(
       home: Dashboard(),
@@ -10,16 +11,57 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(216, 216, 255, 1),
         appBar: AppBar(
           title: const Text(
             'Dashboard',
             style: TextStyle(
-              fontFamily: 'Barlow-Bold',
+              fontFamily: 'Inter-Var',
               fontSize: 25.0,
+              fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
+          actions: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  height: 45,
+                  width: 45,
+                  decoration: const ShapeDecoration(
+                    color: Colors.white,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    splashRadius: 0.1,
+                    icon: const Icon(
+                      Icons.notifications_outlined,
+                      color: Colors.black,
+                      size: 29,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  height: 45,
+                  width: 45,
+                  child: IconButton(
+                    onPressed: () {},
+                    splashRadius: 0.1,
+                    icon: Image.asset(
+                      'assets/3d_avatar_13.png',
+                      height: 100,
+                      width: 100,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
           backgroundColor: const Color.fromRGBO(216, 216, 255, 1),
           bottom: PreferredSize(
               preferredSize: const Size.fromHeight(6.0),
@@ -101,10 +143,19 @@ class Dashboard extends StatelessWidget {
                                 foregroundColor:
                                     const Color.fromARGB(255, 200, 152, 245),
                                 shape: const StadiumBorder()),
-                            child: const Icon(
-                              IconData(0xe105, fontFamily: 'MaterialIcons'),
-                              color: Colors.black,
-                              size: 17,
+                            child: badges.Badge(
+                              badgeContent: const SizedBox(
+                                  child: Center(
+                                child: Text('3',
+                                    style: TextStyle(
+                                        fontSize: 11, color: Colors.white)),
+                              )),
+                              position: badges.BadgePosition.topEnd(),
+                              child: const Icon(
+                                IconData(0xe105, fontFamily: 'MaterialIcons'),
+                                color: Colors.black,
+                                size: 17,
+                              ),
                             ),
                           ),
                           const Text(
