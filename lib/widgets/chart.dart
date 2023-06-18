@@ -52,22 +52,57 @@ Widget card = Expanded(
           ),
           Column(
             children: [
-              SizedBox(
-                height: 170,
-                width: 170,
-                child: SfCircularChart(
-                  palette: const [
-                    Color.fromARGB(255, 253, 216, 111),
-                    Color.fromARGB(255, 143, 133, 255)
-                  ],
-                  series: <CircularSeries>[
-                    DoughnutSeries<GDPData, String>(
-                        cornerStyle: CornerStyle.bothCurve,
-                        dataSource: getChartData(),
-                        xValueMapper: (GDPData data, _) => data.continent,
-                        yValueMapper: (GDPData data, _) => data.gdp)
-                  ],
-                ),
+              Stack(
+                children: [
+                  Positioned(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: SfCircularChart(
+                        palette: const [
+                          Color.fromARGB(255, 253, 216, 111),
+                        ],
+                        series: <CircularSeries>[
+                          DoughnutSeries<GDPData, String>(
+                              innerRadius: '60%',
+                              dataSource: getChartData(),
+                              xValueMapper: (GDPData data, _) => data.continent,
+                              yValueMapper: (GDPData data, _) => data.gdp)
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: SfCircularChart(
+                        palette: const [
+                          Color.fromARGB(255, 253, 216, 111),
+                          Color.fromARGB(255, 143, 133, 255)
+                        ],
+                        series: <CircularSeries>[
+                          DoughnutSeries<GDPData, String>(
+                              innerRadius: "60%",
+                              cornerStyle: CornerStyle.bothCurve,
+                              dataSource: getChartData(),
+                              xValueMapper: (GDPData data, _) => data.continent,
+                              yValueMapper: (GDPData data, _) => data.gdp)
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 95,
+                    left: 80,
+                    child: Text(
+                      "50%",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const Positioned(top: 75, left: 85, child: Text("total"))
+                ],
               )
             ],
           )
@@ -86,7 +121,7 @@ class GDPData {
 List<GDPData> getChartData() {
   final List<GDPData> chartData = [
     GDPData("oceania", 300),
-    GDPData("africa", 200),
+    GDPData("africa", 100),
   ];
   return chartData;
 }
