@@ -30,4 +30,4 @@ flutter:
     
     - family: Inter-Var
       fonts:
-        - asset: fonts/Inter-VariableFont_slnt,wght.ttf
+        - asset: fonts/Inter-Bold.ttf
