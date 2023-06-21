@@ -1,7 +1,7 @@
 // import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+// import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
 
 Widget card = Expanded(
     child: Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 24),
+  padding: const EdgeInsets.symmetric(horizontal: 10),
   child: Card(
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -50,12 +50,14 @@ Widget card = Expanded(
               )
             ],
           ),
-          Column(
-            children: [
-              Stack(
-                children: [
-                  Positioned(
-                    child: SizedBox(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
                       height: 200,
                       width: 200,
                       child: SfCircularChart(
@@ -71,9 +73,7 @@ Widget card = Expanded(
                         ],
                       ),
                     ),
-                  ),
-                  Positioned(
-                    child: SizedBox(
+                    SizedBox(
                       height: 200,
                       width: 200,
                       child: SfCircularChart(
@@ -91,20 +91,20 @@ Widget card = Expanded(
                         ],
                       ),
                     ),
-                  ),
-                  const Positioned(
-                    top: 95,
-                    left: 80,
-                    child: Text(
-                      "50%",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    const Column(
+                      children: [
+                        Text("total"),
+                        Text(
+                          "50%",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600),
+                        )
+                      ],
                     ),
-                  ),
-                  const Positioned(top: 75, left: 85, child: Text("total"))
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),
