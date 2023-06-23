@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:activv/widgets/login_pg.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class _LogoState extends State<Logo> {
 
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const NextPage()));
+          context, MaterialPageRoute(builder: (context) => const FormPage()));
     });
   }
 
