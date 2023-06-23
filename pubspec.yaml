@@ -1,10 +1,10 @@
 name: activv
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.2 <4.0.0'
+  sdk: ">=3.0.2 <4.0.0"
 
 dependencies:
   badges: ^3.1.1
@@ -33,5 +33,3 @@ flutter:
     - family: Inter-Var
       fonts:
         - asset: fonts/Inter-VariableFont_slnt,wght.ttf
-
-    
