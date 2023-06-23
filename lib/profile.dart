@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
 void main() => runApp(const MaterialApp(
-      home: Dashboard(),
+      home: ProfilePage(),
       debugShowCheckedModeBanner: false,
     ));
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
