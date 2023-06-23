@@ -1,3 +1,4 @@
+import 'package:activv/dashboard.dart';
 import 'package:activv/widgets/logo_pg.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/': (context) => const Logo(),
+        '/dash': (context) => const Dashboard()
       },
     );
   }
