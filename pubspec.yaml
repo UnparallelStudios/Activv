@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.2 <4.0.0'
 
 dependencies:
+  badges: ^3.1.1
   flutter:
     sdk: flutter
 
@@ -18,7 +19,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/3d_avatar_13.png
+    - assets/3d_avatar_22.png
+
   fonts:
     - family: Barlow-Bold
       fonts:
         - asset: fonts/Barlow-Bold.ttf
+    
+    - family: Inter-Var
+      fonts:
+        - asset: fonts/Inter-Bold.ttf
