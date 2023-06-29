@@ -1,6 +1,36 @@
+import 'package:activv/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 final _formKey = GlobalKey<FormState>();
+
+class LoginData {
+  final String status;
+  final String message;
+
+  LoginData(this.message, this.status);
+
+  factory LoginData.fromJson(Map<String, dynamic> json) {
+    return LoginData(json['Response'], json['Status']);
+  }
+}
+
+_fetchLoginDetails(BuildContext context) async {
+  final response = await http.post(
+      Uri.parse('https://activv.onrender.com/login'),
+      body: jsonEncode({"Userid": "U2108037", "Password": "210567"}),
+      headers: {'Content-Type': 'application/json'});
+  LoginData details = LoginData.fromJson(jsonDecode(response.body));
+  if (context.mounted) {
+    if (details.status == "Success") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const Dashboard()));
+    }
+  }
+}
 
 class FormPage extends StatelessWidget {
   const FormPage({Key? key}) : super(key: key);
@@ -71,11 +101,7 @@ class FormPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(80))),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Great"),
-                                  ),
-                                );
+                                _fetchLoginDetails(context);
                               }
                             },
                             child: const Text(
