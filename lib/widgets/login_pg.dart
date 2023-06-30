@@ -16,10 +16,11 @@ class LoginData {
   }
 }
 
-_fetchLoginDetails(BuildContext context) async {
+_fetchLoginDetails(
+    BuildContext context, String username, String password) async {
   final response = await http.post(
       Uri.parse('https://activv.onrender.com/login'),
-      body: jsonEncode({"Userid": "U2108037", "Password": "210567"}),
+      body: jsonEncode({"Userid": username, "Password": password}),
       headers: {'Content-Type': 'application/json'});
   LoginData details = LoginData.fromJson(jsonDecode(response.body));
   if (context.mounted) {
@@ -32,8 +33,23 @@ _fetchLoginDetails(BuildContext context) async {
   }
 }
 
-class FormPage extends StatelessWidget {
+class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
+
+  @override
+  State<FormPage> createState() => _FormPageState();
+}
+
+class _FormPageState extends State<FormPage> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +79,7 @@ class FormPage extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 20),
                     child: TextFormField(
+                      controller: usernameController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(), hintText: "Enter UID"),
                       validator: (value) {
@@ -76,6 +93,7 @@ class FormPage extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(bottom: 48),
                     child: TextFormField(
+                      controller: passwordController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: "Enter Password"),
@@ -101,7 +119,10 @@ class FormPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(80))),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                _fetchLoginDetails(context);
+                                _fetchLoginDetails(
+                                    context,
+                                    usernameController.text,
+                                    passwordController.text);
                               }
                             },
                             child: const Text(
