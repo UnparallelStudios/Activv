@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:hive_flutter/hive_flutter.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -30,6 +31,7 @@ class _FormPageState extends State<FormPage> {
   String userid = "";
   String password = "";
   String loginStatus = "n";
+  final userBox = Hive.box("userbox");
 
   @override
   void initState() {
@@ -58,6 +60,8 @@ class _FormPageState extends State<FormPage> {
     LoginData details = LoginData.fromJson(jsonDecode(response.body));
     if (context.mounted) {
       if (details.status == "Success") {
+        userBox.put("userid", userid);
+        userBox.put("password", password);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -155,6 +159,7 @@ class _FormPageState extends State<FormPage> {
                                   setState(() {
                                     loginStatus = "l";
                                   });
+
                                   _fetchLoginDetails(context, userid, password);
                                 }
                               },

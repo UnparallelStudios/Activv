@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:activv/dashboard.dart';
 import 'package:activv/widgets/login_pg.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,13 +19,21 @@ class Logo extends StatefulWidget {
 }
 
 class _LogoState extends State<Logo> {
+  final userBox = Hive.box('userbox');
   @override
   void initState() {
     super.initState();
+    // uncomment the following line to display loginpage.
+    // userBox.delete('userid');
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const FormPage()));
+      if (userBox.get("userid") == null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const FormPage()));
+      } else {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const Dashboard()));
+      }
     });
   }
 
