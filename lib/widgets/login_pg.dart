@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:hive_flutter/hive_flutter.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -25,9 +26,30 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String userid = "";
+  String password = "";
   String loginStatus = "n";
+  final userBox = Hive.box("userbox");
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController.addListener(() {
+      userid = _usernameController.text;
+    });
+    _passwordController.addListener(() {
+      password = _passwordController.text;
+    });
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   _fetchLoginDetails(
       BuildContext context, String username, String password) async {
@@ -38,6 +60,8 @@ class _FormPageState extends State<FormPage> {
     LoginData details = LoginData.fromJson(jsonDecode(response.body));
     if (context.mounted) {
       if (details.status == "Success") {
+        userBox.put("userid", userid);
+        userBox.put("password", password);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -46,8 +70,8 @@ class _FormPageState extends State<FormPage> {
         setState(() {
           loginStatus = "e";
         });
-        usernameController.clear();
-        passwordController.clear();
+        _usernameController.clear();
+        _passwordController.clear();
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
           "login failed",
@@ -55,13 +79,6 @@ class _FormPageState extends State<FormPage> {
         )));
       }
     }
-  }
-
-  @override
-  void dispose() {
-    usernameController.dispose();
-    passwordController.dispose();
-    super.dispose();
   }
 
   @override
@@ -93,7 +110,10 @@ class _FormPageState extends State<FormPage> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
                       child: TextFormField(
-                        controller: usernameController,
+                        controller: _usernameController,
+                        onChanged: (value) {
+                          userid = value;
+                        },
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: "Enter UID"),
@@ -108,7 +128,7 @@ class _FormPageState extends State<FormPage> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 48),
                       child: TextFormField(
-                        controller: passwordController,
+                        controller: _passwordController,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: "Enter Password"),
@@ -139,10 +159,8 @@ class _FormPageState extends State<FormPage> {
                                   setState(() {
                                     loginStatus = "l";
                                   });
-                                  _fetchLoginDetails(
-                                      context,
-                                      usernameController.text,
-                                      passwordController.text);
+
+                                  _fetchLoginDetails(context, userid, password);
                                 }
                               },
                               child: const Text(
