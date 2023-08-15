@@ -23,7 +23,7 @@ class _LogoState extends State<Logo> {
   @override
   void initState() {
     super.initState();
-    // uncomment the following line to display loginpage.
+    // ucomment the following line to enable user persistance
     userBox.delete('userid');
 
     Timer(const Duration(seconds: 3), () {
