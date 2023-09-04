@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:activv/widgets/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:activv/utils/json_convert.dart';
 import 'package:activv/models/subject_model.dart';
@@ -22,6 +23,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
   List<Subject> _subjectList = [];
+  final userBox = Hive.box('userbox');
 
   void _onItemTapped(int index) {
     setState(() {
@@ -36,8 +38,12 @@ class _DashboardState extends State<Dashboard> {
 
   Future getAttendanceData() async {
     List<Subject> tempList = [];
-    final response = await http.post(Uri.parse('http://10.0.2.2:5000/'),
-        body: jsonEncode({"Userid": "U2108037", "Password": "210567"}),
+    final response = await http.post(Uri.parse('https://activv.onrender.com/'),
+        // uses data stored in Hive userbox to get the userid and password
+        body: jsonEncode({
+          "Userid": userBox.get("userid"),
+          "Password": userBox.get("password")
+        }),
         headers: {'Content-Type': 'application/json'});
     Map<String, dynamic> responseData = jsonDecode(response.body);
     List<String> rawAbsentData =
