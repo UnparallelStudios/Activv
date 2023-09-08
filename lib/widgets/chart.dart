@@ -4,30 +4,30 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Column(
-          children: [
-            Row(mainAxisSize: MainAxisSize.max, children: [
-              Expanded(child: SubjectCard(subject: "DV", absentNumber: 20))
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, children: [
-              Expanded(child: SubjectCard(subject: "IS", absentNumber: 25))
-            ]),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: Scaffold(
+//         body: Column(
+//           children: [
+//             Row(mainAxisSize: MainAxisSize.max, children: [
+//               Expanded(child: SubjectCard(subject: "DV", absentNumber: 20))
+//             ]),
+//             Row(mainAxisSize: MainAxisSize.max, children: [
+//               Expanded(child: SubjectCard(subject: "IS", absentNumber: 25))
+//             ]),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class GDPData {
   GDPData(this.continent, this.gdp);
@@ -46,9 +46,13 @@ List<GDPData> getChartData() {
 class SubjectCard extends StatelessWidget {
   final int absentNumber;
   final String subject;
+  final int totalDays;
 
   const SubjectCard(
-      {super.key, required this.subject, required this.absentNumber});
+      {super.key,
+      required this.subject,
+      required this.absentNumber,
+      required this.totalDays});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +80,17 @@ class SubjectCard extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     child: Text(
-                      'No of days absent: $absentNumber',
+                      'Absent Classes: $absentNumber',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: Text(
+                      'Total Classes: $totalDays',
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,

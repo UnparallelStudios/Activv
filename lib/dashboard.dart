@@ -42,15 +42,21 @@ class _DashboardState extends State<Dashboard> {
         // uses data stored in Hive userbox to get the userid and password
         body: jsonEncode({
           "Userid": userBox.get("userid"),
-          "Password": userBox.get("password")
+          "Password": userBox.get("password"),
+          "Year": "2025",
+          "Sem": "S4",
+          "Branch": "AID"
         }),
         headers: {'Content-Type': 'application/json'});
     Map<String, dynamic> responseData = jsonDecode(response.body);
     List<String> rawAbsentData =
         getRawAbsentData(responseData['Response']['leaves']);
+    Map<String, dynamic> totalSubjectMap =
+        responseData['Response']['Total_classes'];
     Map<String, dynamic> absentSubjectMap = countAllOccurrences(rawAbsentData);
     absentSubjectMap.forEach((key, value) {
-      tempList.add(Subject(subCode: key, daysAbsent: value));
+      tempList.add(Subject(
+          subCode: key, daysAbsent: value, totalDays: totalSubjectMap[key]));
     });
     _subjectList = tempList;
   }
@@ -173,8 +179,10 @@ class _DashboardState extends State<Dashboard> {
                         itemCount: _subjectList.length,
                         itemBuilder: (context, index) {
                           return SubjectCard(
-                              subject: _subjectList[index].subCode,
-                              absentNumber: _subjectList[index].daysAbsent);
+                            subject: _subjectList[index].subCode,
+                            absentNumber: _subjectList[index].daysAbsent,
+                            totalDays: _subjectList[index].totalDays,
+                          );
                         });
                     // otherwise show the loading indicator
                   } else {
