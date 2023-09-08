@@ -23,7 +23,7 @@ class _LogoState extends State<Logo> {
   @override
   void initState() {
     super.initState();
-    // ucomment the following line to enable user persistance
+    // comment the following line to enable user persistance
     userBox.delete('userid');
 
     Timer(const Duration(seconds: 3), () {
