@@ -9,7 +9,7 @@ final _formKey = GlobalKey<FormState>();
 
 class LoginData {
   final String status;
-  final String message;
+  final Map message;
 
   LoginData(this.message, this.status);
 

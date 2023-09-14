@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
-void main() {
-  // runApp(const MyApp());
-}
-
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
 
