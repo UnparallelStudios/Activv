@@ -22,14 +22,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
-  List<Subject> _subjectList = [];
+  bool isEmptyData = false;
   final userBox = Hive.box('userbox');
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   void initState() {
@@ -44,36 +38,42 @@ class _DashboardState extends State<Dashboard> {
           "Userid": userBox.get("userid"),
           "Password": userBox.get("password"),
           "Year": "2025",
-          "Sem": "S4",
+          "Sem": "S5",
           "Branch": "AID"
         }),
         headers: {'Content-Type': 'application/json'});
     Map<String, dynamic> responseData = jsonDecode(response.body);
     List<String> rawAbsentData =
         getRawAbsentData(responseData['Response']['leaves']);
-    Map<String, dynamic> totalSubjectMap =
-        responseData['Response']['Total_classes'];
+    if (rawAbsentData.isEmpty) {
+      isEmptyData = true;
+    } else {
+      isEmptyData = false;
+    }
+    // Map<String, dynamic> totalSubjectMap =
+    //     responseData['Response']['Total_classes'];
     Map<String, dynamic> absentSubjectMap = countAllOccurrences(rawAbsentData);
     absentSubjectMap.forEach((key, value) {
-      tempList.add(Subject(
-          subCode: key, daysAbsent: value, totalDays: totalSubjectMap[key]));
+      tempList.add(Subject(subCode: key, daysAbsent: value, totalDays: 30));
     });
-    _subjectList = tempList;
+    return tempList;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.business), label: "Business"),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: "School")
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromRGBO(0, 0, 153, 1),
-        onTap: _onItemTapped,
+      bottomNavigationBar: StatefulBuilder(
+        builder: (context, setState) => BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.business), label: "Business"),
+            BottomNavigationBarItem(icon: Icon(Icons.school), label: "School")
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color.fromRGBO(0, 0, 153, 1),
+          onTap: (int index) => setState(() => _selectedIndex = index),
+        ),
       ),
       appBar: AppBar(
         title: const Padding(
@@ -156,11 +156,12 @@ class _DashboardState extends State<Dashboard> {
         ],
         backgroundColor: const Color.fromRGBO(216, 216, 255, 1),
         bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(15.0),
-            child: Container(
-              color: const Color.fromRGBO(167, 167, 212, 1),
-              height: 3.0,
-            )),
+          preferredSize: const Size.fromHeight(15.0),
+          child: Container(
+            color: const Color.fromRGBO(167, 167, 212, 1),
+            height: 3.0,
+          ),
+        ),
         elevation: 0,
       ),
       body: Column(
@@ -175,15 +176,21 @@ class _DashboardState extends State<Dashboard> {
                 builder: (context, snapshot) {
                   // if it is done loading then show the attendance data
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return ListView.builder(
-                        itemCount: _subjectList.length,
-                        itemBuilder: (context, index) {
-                          return SubjectCard(
-                            subject: _subjectList[index].subCode,
-                            absentNumber: _subjectList[index].daysAbsent,
-                            totalDays: _subjectList[index].totalDays,
-                          );
-                        });
+                    if (isEmptyData) {
+                      return const Center(
+                          child: Text("You were not absent in any subject"));
+                    } else {
+                      return ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index) {
+                            return SubjectCard(
+                              subject: snapshot.data[index].subCode,
+                              absentNumber: snapshot.data[index].daysAbsent,
+                              totalDays: snapshot.data[index].totalDays,
+                            );
+                          });
+                    }
+
                     // otherwise show the loading indicator
                   } else {
                     return const Center(
