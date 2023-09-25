@@ -10,11 +10,19 @@ final _formKey = GlobalKey<FormState>();
 class LoginData {
   final String status;
   final Map message;
+  final String userName;
+  final String userImage;
+  final Map<String, dynamic> atData;
 
-  LoginData(this.message, this.status);
+  LoginData(
+      this.message, this.status, this.userName, this.userImage, this.atData);
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
-    return LoginData(json['Response'], json['Status']);
+    var currentDate = DateTime.now();
+    var newFormat = '${currentDate.day}-${currentDate.month}';
+    json['fetch_date'] = newFormat;
+    return LoginData(json['Response'], json['Status'], json['User_name'],
+        json['User_image'], json);
   }
 }
 
@@ -59,7 +67,7 @@ class _FormPageState extends State<FormPage> {
               "Userid": username,
               "Password": password,
               "Year": "2025",
-              "Sem": "S4",
+              "Sem": "S5",
               "Branch": "AID"
             }),
             headers: {'Content-Type': 'application/json'});
@@ -68,6 +76,9 @@ class _FormPageState extends State<FormPage> {
       if (details.status == "Success") {
         userBox.put("userid", userid);
         userBox.put("password", password);
+        userBox.put("username", details.userName);
+        userBox.put("userimage", details.userImage);
+        userBox.put("atdata", jsonEncode(details.atData));
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(

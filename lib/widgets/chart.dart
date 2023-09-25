@@ -51,12 +51,14 @@ String holderText(int absent, int total) {
 class SubjectCard extends StatelessWidget {
   final int absentNumber;
   final String subject;
+  final String subName;
   final int totalDays;
 
   const SubjectCard(
       {super.key,
       required this.subject,
       required this.absentNumber,
+      required this.subName,
       required this.totalDays});
 
   @override
@@ -80,10 +82,11 @@ class SubjectCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // Text(
-                    //   "Data Visualisation",
-                    //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    // ),
+                    Text(
+                      subName,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
                     Text(
                       subject,
                       style: const TextStyle(
