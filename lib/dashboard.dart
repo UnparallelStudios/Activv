@@ -41,6 +41,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color.fromARGB(255, 33, 33, 33),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(
@@ -48,7 +49,7 @@ class _DashboardState extends State<Dashboard> {
             BottomNavigationBarItem(icon: Icon(Icons.event), label: "Events")
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: const Color.fromRGBO(0, 0, 153, 1),
+          selectedItemColor: Colors.white,
           onTap: (int index) => setState(() => _selectedIndex = index),
         ),
         appBar: AppBar(
@@ -60,7 +61,7 @@ class _DashboardState extends State<Dashboard> {
                 fontFamily: 'Inter-Var',
                 fontSize: 25.0,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ),
@@ -136,11 +137,11 @@ class _DashboardState extends State<Dashboard> {
               ),
             )
           ],
-          backgroundColor: const Color.fromRGBO(216, 216, 255, 1),
+          backgroundColor: const Color.fromARGB(255, 27, 27, 27),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(15.0),
             child: Container(
-              color: const Color.fromRGBO(167, 167, 212, 1),
+              color: const Color.fromARGB(255, 47, 47, 47),
               height: 3.0,
             ),
           ),
@@ -240,8 +241,8 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             flex: 7,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-              color: const Color.fromRGBO(216, 216, 255, 1),
+              padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+              color: const Color.fromARGB(255, 27, 27, 27),
               child: FutureBuilder(
                 future: getAttendanceData(),
                 builder: (context, snapshot) {
@@ -292,14 +293,12 @@ class EventsPage extends StatelessWidget {
           flex: 1,
           child: Container(
             width: double.infinity,
-            color: const Color.fromRGBO(
-              216,
-              216,
-              255,
-              1,
-            ),
+            color: const Color.fromARGB(255, 27, 27, 27),
             child: const Center(
-              child: Text("Events Page coming soon"),
+              child: Text(
+                "Events Page coming soon",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         )
