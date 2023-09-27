@@ -81,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(3.0),
                           ),
-                          minimumSize: const Size(200.0, 40.0)),
+                          minimumSize: const Size(200.0, 60.0)),
                       child: const Text(
                         'Logout',
                         style: TextStyle(
