@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
             flex: 7,
             child: Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                color: const Color.fromRGBO(216, 216, 255, 1),
+                color: const Color.fromARGB(255, 27, 27, 27),
                 child: Column(
                   children: <Widget>[
                     const SizedBox(
@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Text(
                       userbox.get("username"),
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontFamily: 'Inter-var',
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(3.0),
                           ),
-                          minimumSize: const Size(200.0, 40.0)),
+                          minimumSize: const Size(200.0, 60.0)),
                       child: const Text(
                         'Logout',
                         style: TextStyle(

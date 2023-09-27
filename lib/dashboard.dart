@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:activv/profile.dart';
 import 'package:activv/widgets/chart.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
+// import 'package:badges/badges.dart' as badges;
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:activv/utils/json_convert.dart';
@@ -41,14 +41,25 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color.fromARGB(255, 33, 33, 33),
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: "Profile"),
-            BottomNavigationBarItem(icon: Icon(Icons.event), label: "Events")
+                icon: Icon(
+                  Icons.home,
+                  color: Color.fromARGB(255, 120, 120, 120),
+                ),
+                label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle,
+                    color: Color.fromARGB(255, 120, 120, 120)),
+                label: "Profile"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.event,
+                    color: Color.fromARGB(255, 120, 120, 120)),
+                label: "Events")
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: const Color.fromRGBO(0, 0, 153, 1),
+          selectedItemColor: Colors.white,
           onTap: (int index) => setState(() => _selectedIndex = index),
         ),
         appBar: AppBar(
@@ -60,54 +71,54 @@ class _DashboardState extends State<Dashboard> {
                 fontFamily: 'Inter-Var',
                 fontSize: 25.0,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ),
-          actions: <Widget>[
+          actions: const <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 12.0, 0, 0),
               child: Row(
                 children: <Widget>[
-                  Container(
-                    alignment: Alignment.center,
-                    height: 45,
-                    width: 45,
-                    decoration: const ShapeDecoration(
-                      color: Colors.white,
-                      shape: CircleBorder(),
-                    ),
-                    child: badges.Badge(
-                      badgeContent: const SizedBox(
-                          child: Center(
-                        child: Text(
-                          '22',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )),
-                      position: badges.BadgePosition.topEnd(
-                        top: -5,
-                        end: -5,
-                      ),
-                      badgeStyle: const badges.BadgeStyle(
-                        badgeColor: Color.fromRGBO(0, 0, 153, 1),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        padding: EdgeInsets.zero,
-                        splashRadius: 0.1,
-                        icon: const Icon(
-                          Icons.notifications_outlined,
-                          color: Colors.black,
-                          size: 31,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
+                  // Container(
+                  //   alignment: Alignment.center,
+                  //   height: 45,
+                  //   width: 45,
+                  //   decoration: const ShapeDecoration(
+                  //     color: Colors.white,
+                  //     shape: CircleBorder(),
+                  //   ),
+                  //   child: badges.Badge(
+                  //     badgeContent: const SizedBox(
+                  //         child: Center(
+                  //       child: Text(
+                  //         '22',
+                  //         style: TextStyle(
+                  //           fontSize: 11,
+                  //           color: Colors.white,
+                  //         ),
+                  //       ),
+                  //     )),
+                  //     position: badges.BadgePosition.topEnd(
+                  //       top: -5,
+                  //       end: -5,
+                  //     ),
+                  //     badgeStyle: const badges.BadgeStyle(
+                  //       badgeColor: Color.fromRGBO(0, 0, 153, 1),
+                  //     ),
+                  //     child: IconButton(
+                  //       onPressed: () {},
+                  //       padding: EdgeInsets.zero,
+                  //       splashRadius: 0.1,
+                  //       icon: const Icon(
+                  //         Icons.notifications_outlined,
+                  //         color: Colors.black,
+                  //         size: 31,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  SizedBox(
                     width: 10,
                   ),
                   // Container(
@@ -129,18 +140,18 @@ class _DashboardState extends State<Dashboard> {
                   //     ),
                   //   ),
                   // ),
-                  const SizedBox(
+                  SizedBox(
                     width: 15.0,
                   )
                 ],
               ),
             )
           ],
-          backgroundColor: const Color.fromRGBO(216, 216, 255, 1),
+          backgroundColor: const Color.fromARGB(255, 27, 27, 27),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(15.0),
             child: Container(
-              color: const Color.fromRGBO(167, 167, 212, 1),
+              color: const Color.fromARGB(255, 47, 47, 47),
               height: 3.0,
             ),
           ),
@@ -181,8 +192,8 @@ class _HomePageState extends State<HomePage> {
       } else {
         isEmptyData = false;
       }
-      // Map<String, dynamic> totalSubjectMap =
-      //     responseData['Response']['Total_classes'];
+      Map<String, dynamic> totalSubjectMap =
+          atData['Response']['Total_classes'];
       Map<String, dynamic> absentSubjectMap =
           countAllOccurrences(rawAbsentData);
       // print('absend subject map is: $absentSubjectMap');
@@ -190,7 +201,7 @@ class _HomePageState extends State<HomePage> {
         tempList.add(Subject(
             subCode: key,
             daysAbsent: value,
-            totalDays: 30,
+            totalDays: totalSubjectMap[key],
             subName: subCodes[key]));
       });
       return tempList;
@@ -218,15 +229,15 @@ class _HomePageState extends State<HomePage> {
     } else {
       isEmptyData = false;
     }
-    // Map<String, dynamic> totalSubjectMap =
-    //     responseData['Response']['Total_classes'];
+    Map<String, dynamic> totalSubjectMap =
+        responseData['Response']['Total_classes'];
     Map<String, dynamic> absentSubjectMap = countAllOccurrences(rawAbsentData);
     // print('absend subject map is: $absentSubjectMap');
     absentSubjectMap.forEach((key, value) {
       tempList.add(Subject(
           subCode: key,
           daysAbsent: value,
-          totalDays: 30,
+          totalDays: totalSubjectMap[key],
           subName: subCodes[key]));
     });
     return tempList;
@@ -240,16 +251,19 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             flex: 7,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-              color: const Color.fromRGBO(216, 216, 255, 1),
+              padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+              color: const Color.fromARGB(255, 27, 27, 27),
               child: FutureBuilder(
                 future: getAttendanceData(),
                 builder: (context, snapshot) {
                   // if it is done loading then show the attendance data
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (isEmptyData) {
-                      return const Center(
-                          child: Text("You were not absent in any subject"));
+                      return Center(
+                          child: Text(
+                        "You were not absent in any subject",
+                        style: TextStyle(color: Colors.grey[50]),
+                      ));
                     } else {
                       // print('data is : $snapshot.data');
                       return ListView.builder(
@@ -292,14 +306,12 @@ class EventsPage extends StatelessWidget {
           flex: 1,
           child: Container(
             width: double.infinity,
-            color: const Color.fromRGBO(
-              216,
-              216,
-              255,
-              1,
-            ),
+            color: const Color.fromARGB(255, 27, 27, 27),
             child: const Center(
-              child: Text("Events Page coming soon"),
+              child: Text(
+                "Events Page coming soon",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         )
