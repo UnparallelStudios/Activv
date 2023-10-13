@@ -43,13 +43,26 @@ class _LogoState extends State<Logo> {
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 153),
         body: Center(
-          child: Text(
-            "ACTIVV",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 76,
-                fontFamily: "Barlow-Bold",
-                letterSpacing: 6),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "ACTIVV",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 76,
+                    fontFamily: "Barlow-Bold",
+                    letterSpacing: 6),
+              ),
+              Text(
+                "TheCodeList",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
+              )
+            ],
           ),
         ),
       ),
