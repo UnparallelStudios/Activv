@@ -44,7 +44,7 @@ List<GDPData> getChartData(int absent, int total) {
 
 String attendancePercentage(int absent, int total) {
   double value = (absent / total) * 100;
-  int finalValue = 100 - value.toInt();
+  int finalValue = (100 - value).toInt();
   return finalValue.toString();
 }
 
