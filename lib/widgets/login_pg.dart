@@ -64,13 +64,19 @@ class _FormPageState extends State<FormPage> {
     final response =
         await http.post(Uri.parse('https://activv.onrender.com/login'),
             body: jsonEncode({
-              "Userid": username,
+              "Userid": username.toUpperCase(),
               "Password": password,
               "Year": "2025",
               "Sem": "S5",
               "Branch": "AID"
             }),
             headers: {'Content-Type': 'application/json'});
+    if (response.statusCode != 200) {
+      setState(() {
+        loginStatus = "e";
+      });
+      return;
+    }
     LoginData details = LoginData.fromJson(jsonDecode(response.body));
     if (context.mounted) {
       if (details.status == "Success") {

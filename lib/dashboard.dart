@@ -220,6 +220,7 @@ class _HomePageState extends State<HomePage> {
     // print('response data is $responseData');
 
     responseData['fetch_date'] = newFormat;
+    userBox.put('atdata', jsonEncode(responseData));
     // print('response data $responseData');
     List<String> rawAbsentData =
         getRawAbsentData(responseData['Response']['leaves']);
