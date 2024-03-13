@@ -62,12 +62,12 @@ class _FormPageState extends State<FormPage> {
   _fetchLoginDetails(
       BuildContext context, String username, String password) async {
     final response =
-        await http.post(Uri.parse('https://activv.onrender.com/login'),
+        await http.post(Uri.parse('https://pink-tired-raven.cyclic.app/login'),
             body: jsonEncode({
               "Userid": username.toUpperCase(),
               "Password": password,
               "Year": "2025",
-              "Sem": "S5",
+              "Sem": "S6",
               "Branch": "AID"
             }),
             headers: {'Content-Type': 'application/json'});

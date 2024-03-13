@@ -55,7 +55,7 @@ class _LogoState extends State<Logo> {
                     letterSpacing: 6),
               ),
               Text(
-                "TheCodeList",
+                "Unparallel Studios",
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 22,

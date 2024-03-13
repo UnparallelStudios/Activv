@@ -206,16 +206,17 @@ class _HomePageState extends State<HomePage> {
       });
       return tempList;
     }
-    final response = await http.post(Uri.parse('https://activv.onrender.com/'),
-        // uses data stored in Hive userbox to get the userid and password
-        body: jsonEncode({
-          "Userid": userBox.get("userid"),
-          "Password": userBox.get("password"),
-          "Year": "2025",
-          "Sem": "S5",
-          "Branch": "AID"
-        }),
-        headers: {'Content-Type': 'application/json'});
+    final response =
+        await http.post(Uri.parse('https://pink-tired-raven.cyclic.app/'),
+            // uses data stored in Hive userbox to get the userid and password
+            body: jsonEncode({
+              "Userid": userBox.get("userid"),
+              "Password": userBox.get("password"),
+              "Year": "2025",
+              "Sem": "S6",
+              "Branch": "AID"
+            }),
+            headers: {'Content-Type': 'application/json'});
     Map<String, dynamic> responseData = jsonDecode(response.body);
     // print('response data is $responseData');
 
